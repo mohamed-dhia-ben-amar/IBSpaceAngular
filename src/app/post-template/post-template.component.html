@@ -1,0 +1,53 @@
+<main>
+    <div class="post-container" *ngFor="let post of posts">
+        <div class="post-wrapper" *ngIf="posts!.length > 0">
+            <div class="post-header">
+                <img src="{{ post.owner.picture }}" alt="Post Author">
+                <div class="post-header-info">
+                    <p>{{ post.owner.displayName }}</p>
+                    <p>{{ post.createdAt | date }}</p>
+                </div>
+            </div>
+            <div class="post-body">
+                <!-- Display the truncated version of the post.body when it is more than 200 characters and not visible -->
+                <p class="post-text" *ngIf="!isPostBodyVisible(post.id)">{{ post.body | slice:0:200 }}{{
+                    post.body.length > 200 ? '...' : '' }}</p>
+
+                <!-- Show the "View More" link only when the post.body is more than 200 characters and not visible -->
+                <a *ngIf="post.body.length > 200 && !isPostBodyVisible(post.id)" (click)="togglePostBody(post.id)">View
+                    More</a>
+
+                <!-- Show the full content when the visibility is true -->
+                <p class="post-text" *ngIf="isPostBodyVisible(post.id)">{{ post.body }}</p>
+
+                <!-- Show the "View Less" link only when the visibility is true -->
+                <a *ngIf="isPostBodyVisible(post.id)" (click)="togglePostBody(post.id)">View Less</a>
+
+                <div class="post-img-container"
+                    *ngIf="post.mediaCategory && post.mediaCategory.mediaImg && post.mediaCategory.mediaImg.length > 0">
+                    <img src="{{ post.mediaCategory.mediaImg[0].url }}" alt="">
+                </div>
+                <div class="container">
+                    <div class="box" style="width:300px">
+                        <img id="myimage" src="">
+                        <div class="is-clipped">
+                            <div id="mytitle" class="has-text-weight-bold"></div>
+                            <div id="mydescription" class="mt-2"></div>
+                            <div id="myurl" class="mt-2 is-size-7"></div>
+                        </div>
+                    </div>
+                </div>
+                <a [routerLink]="['/postDetail', post.id]">Learn More</a>
+            </div>
+            <div class="post-footer">
+                <mat-icon>thumb_up_alt</mat-icon>
+                <span id="nbr_likes">{{ post.numberLike }} likes</span>
+                <mat-icon>sms</mat-icon>
+                <span id="nbr_comments">{{ post.numberComment }} comments</span>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="posts!.length <= 0">
+        <h3>No Posts To Show</h3>
+    </div>
+</main>

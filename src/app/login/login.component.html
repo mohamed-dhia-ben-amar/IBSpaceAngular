@@ -1,0 +1,61 @@
+<header>
+        <header class="header-menu">
+            <img class="brand-logo" src="/assets/LogoIBS.png" alt="logo" aria-hidden="true" width="50px" height="60px">
+            <h3>
+                IBSpace Website
+                <small class="text-muted">Welcomes you!</small>
+            </h3>
+            <div class="contact-info">
+                <span><i class="fa fa-phone material-icons">phone</i>+216 53140939</span>
+                <br>
+                <span><i class="fa fa-envelope material-icons">email</i>mohameddhiabenamar@gmail.com</span>
+            </div>
+        </header>
+</header>
+<main>
+    <section class="content">
+        <div class="container">
+            <img src="/assets/LogoIBS.png" alt="Company Logo" class="logo">
+
+            <form #formulaire="ngForm" (ngSubmit)="Signin(formulaire)">
+                <div class="form-group">
+                    <input name="email" [(ngModel)]="email" type="email" class="form-control" placeholder="Email"
+                        autocomplete="nope" required>
+                    <div *ngIf="formulaire.controls['email'] && !formulaire.controls['email']!.valid && formulaire.controls['email']!.dirty"
+                        class="text-danger">Email is required.</div>
+                    <span class="fa fa-envelope material-icons">email</span>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <input id="password" name="password" [(ngModel)]="password" type="password"
+                            autocomplete="new-password" class="form-control" placeholder="Password" required>
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-lock material-icons">lock</i>
+                            </span>
+                            <span class="input-group-text password-toggle" (click)="togglePasswordVisibility()">
+                                <i class="fa fa-eye material-icons" *ngIf="!showPassword">visibility</i>
+                                <i class="fa fa-eye-slash material-icons" *ngIf="showPassword">visibility_off</i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+
+                <div class="form-group remember-forgot">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password</a>
+                </div>
+
+                <p class="terms">By using this app, you agree to our <a href="#">Terms and Conditions</a>.</p>
+                <button type="button" (click)="openLoginOptionsDialog()" class="btn btn-secondary other-login-options">Other Login Options</button>
+                <p class="create-account">Don't have an account? <a [routerLink]="['/signup']">Create an account</a>.
+                </p>
+            </form>
+        </div>
+    </section>
+</main>

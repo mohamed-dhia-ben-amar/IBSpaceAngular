@@ -1,0 +1,12 @@
+<div class="PopUpBackdrop">
+  <div class="PopUpMenu">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search" (input)="filterCountries()" />
+    <ul>
+      <li *ngFor="let country of filteredCountries" (click)="selectCountry(country)">
+        <img src="{{country.logo}}" alt="{{country.name}}" width="20px" height="20px">
+        {{country.name}}
+      </li>
+    </ul>
+    <button class="CloseButton" (click)="closeMenu()">Close</button>
+  </div>
+</div>

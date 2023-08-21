@@ -1,0 +1,54 @@
+.PopUpMenu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    max-height: 300px;
+    /* Set a maximum height for the menu */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+}
+
+.PopUpMenu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.PopUpMenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.PopUpMenu li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.PopUpMenu li:hover {
+    background-color: #e0e0e0;
+}
+
+.PopUpMenu li:last-child {
+    margin-bottom: 20px;
+}
+
+.CloseButton {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

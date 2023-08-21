@@ -1,0 +1,22 @@
+<div class="popup-container">
+    <div class="popup-content">
+        <h2 mat-dialog-title>Other Login Options</h2>
+        <div mat-dialog-content>
+            <div class="d-flex flex-column align-items-center">
+                <button type="button" class="btn btn-primary" (click)="loginWithGoogle()">
+                    <img src="https://cdn4.iconfinder.com/data/icons/miu-hexagon-flat-social/60/google_plus-hexagon-social-media-32.png"
+                        alt="Google" matTooltip="Google+" matTooltipPosition="above">
+                    Google Login
+                </button>
+                <button type="button" class="btn btn-primary" (click)="loginWithFacebook()">
+                    <img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/Untitled-16-32.png"
+                        alt="Facebook" matTooltip="Facebook" matTooltipPosition="above">
+                    Facebook Login
+                </button>
+            </div>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button (click)="closeDialog()">Close</button>
+        </div>
+    </div>
+</div>

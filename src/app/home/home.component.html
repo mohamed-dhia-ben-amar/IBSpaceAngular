@@ -1,0 +1,15 @@
+<header class="header-menu">
+    <img class="brand-logo" src="/assets/LogoIBS.png" alt="logo" aria-hidden="true" width=50px height=60px>
+    <ul class="menu">
+        <li><a><span class="material-icons">person</span></a></li>
+        <li><a><span class="material-icons">mail</span></a></li>
+        <li><a><span class="material-icons">calendar_month</span></a></li>
+        <li><a (click)="displayFlagList()"><span class="material-icons">flag</span></a></li>
+    </ul>
+</header>
+<main>
+    <a [routerLink]="['/addPost']"><button class="add-post-button">Add Post</button></a>
+    <section class="content">
+        <app-post-template></app-post-template>
+    </section>
+</main>

@@ -1,0 +1,1 @@
+export const getCountriesUrl = 'https://api.ib-space.com/api/Country';

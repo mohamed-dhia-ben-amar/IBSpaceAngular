@@ -1,0 +1,134 @@
+/* Add your custom styles here */
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #d2d2d2, #ffffff);
+}
+
+.post-container {
+    width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.post-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Set align-items to flex-start */
+    margin-top: 20px;
+    border: 10;
+
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-header-info p {
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+}
+
+.post-img-container {
+    width: 100%;
+}
+
+.post-body {
+    width: 100%;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 16px;
+}
+
+.post-body a {
+    color: #b4cbd4;
+    text-decoration: none;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.post-footer button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.post-footer button:last-child {
+    margin-right: 0;
+}
+
+.post-footer span {
+    color: #555;
+    font-size: 14px;
+}
+
+.icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/facebook_circle-512.png');
+    background-size: cover;
+}
+
+.like-icon {
+    background-image: url('https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/heart_circle-512.png');
+}
+
+.comment-icon {
+    background-image: url('https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/comment_circle-512.png');
+}
+
+.share-icon {
+    background-image: url('https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/share_circle-512.png');
+}
+
+.save-icon {
+    background-image: url('https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/bookmark_circle-512.png');
+}
+
+.post-text {
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.post-text {
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.post-footer mat-icon {
+    margin-right: 5px;
+}
+
+img {
+    width: -webkit-fill-available;
+}

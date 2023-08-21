@@ -1,0 +1,41 @@
+<header class="header-menu">
+    <img class="brand-logo" src="/assets/LogoIBS.png" alt="logo" aria-hidden="true" width="50px" height="60px" class="back-to-home">
+    <a [routerLink]="['/home']" class="back-to-home">
+        <i class="material-icons">arrow_back</i> Back to Home
+    </a>
+</header>
+<main>
+    <div class="post-container">
+        <div class="post-wrapper">
+            <div class="post-header">
+                <img src="{{ post.owner.picture }}" alt="Post Author">
+                <div class="post-header-info">
+                    <p>{{ post.owner.displayName }}</p>
+                    <p>{{ post.createdAt | date }}</p>
+                </div>
+            </div>
+            <div class="post-body">
+                <p>{{ post.body }}</p>
+                <div class="post-img-container"
+                    *ngIf="post.mediaCategory && post.mediaCategory.mediaImg && post.mediaCategory.mediaImg.length > 0">
+                    <img src="{{ post.mediaCategory.mediaImg[0].url }}" alt="" class="postImage">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-container">
+        <h1 style="text-align: center;">No Comments To Show</h1>
+        <div class="comment" *ngFor="let comment of post.comments">
+            <!--
+            <img src="{{ comment.author.picture }}" alt="Comment Author">
+            <div class="comment-info">
+                <p>{{ comment.author.displayName }}</p>
+                <p>{{ comment.createdAt | date }}</p>
+            </div>
+            <div class="comment-body">
+                <p>{{ comment.body }}</p>
+            </div>
+            -->
+        </div>
+    </div>
+</main>

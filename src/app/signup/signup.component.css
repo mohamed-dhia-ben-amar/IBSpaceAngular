@@ -1,0 +1,234 @@
+.header-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1%;
+}
+
+header {
+    display: block;
+    height: 60px;
+    padding: var(--content-padding);
+    box-shadow: 0px 5px 25px var(--shadow-color);
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 3%;
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    transform: perspective(500px) rotateY(-42deg);
+    -webkit-transform: perspective(500px) rotateY(-42deg);
+    -moz-transform: perspective(500px) rotateY(-42deg);
+    -ms-transform: perspective(500px) rotateY(-42deg);
+    -o-transform: perspective(500px) rotateY(-42deg);
+    animation-name: rotate-windows;
+    animation-iteration-count: infinite;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes rotate-windows {
+    0% {
+        transform: perspective(500px) rotateY(-42deg);
+        -webkit-transform: perspective(500px) rotateY(-42deg);
+        -moz-transform: perspective(500px) rotateY(-42deg);
+        -ms-transform: perspective(500px) rotateY(-42deg);
+        -o-transform: perspective(500px) rotateY(-42deg);
+    }
+
+    50% {
+        transform: perspective(500px) rotateY(0deg);
+        -webkit-transform: perspective(500px) rotateY(0deg);
+        -moz-transform: perspective(500px) rotateY(0deg);
+        -ms-transform: perspective(500px) rotateY(0deg);
+        -o-transform: perspective(500px) rotateY(0deg);
+    }
+
+    100% {
+        transform: perspective(500px) rotateY(-42deg);
+        -webkit-transform: perspective(500px) rotateY(-42deg);
+        -moz-transform: perspective(500px) rotateY(-42deg);
+        -ms-transform: perspective(500px) rotateY(-42deg);
+        -o-transform: perspective(500px) rotateY(-42deg);
+    }
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 0%;
+    margin-left: 0%;
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: 0 0 5px #aaa;
+}
+
+.fa {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    font-size: 18px;
+    color: #aaa;
+    pointer-events: none;
+}
+
+.password-toggle {
+    cursor: pointer;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.forgot-password {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.terms a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.other-login-options {
+    width: 100%;
+    padding: 10px;
+    background-color: #e20f0f;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+}
+
+.other-login-options:hover {
+    background-color: #ddd;
+}
+
+.create-account {
+    font-size: 14px;
+}
+
+.create-account a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+h3 {
+    color: #007bff;
+}
+
+h3 .text-muted {
+    color: #469cf7;
+}
+
+.input-group-append .input-group-text {
+    position: absolute;
+    right: 0;
+    top: 15px;
+    left: 505px;
+    z-index: 1;
+    padding: 0.375rem 0.75rem;
+    border: none;
+    background-color: transparent;
+}
+
+.input-group-append .input-group-text i {
+    display: block;
+}
+
+.password-toggle i {
+    position: relative;
+    top: 3px;
+    /* Adjust this value as needed */
+}
+
+.fa {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    font-size: 18px;
+    color: #aaa;
+    pointer-events: none;
+}
+
+.password-toggle i {
+    position: relative;
+    top: 3px;
+    /* Adjust this value as needed */
+}
+
+/* New CSS styles for the updated HTML structure */
+
+.header-menu .fa {
+    position: static;
+    margin-right: 5px;
+}
+
+.contact-info .fa {
+    margin-right: 5px;
+}
+
+.input-group-append .input-group-text i {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: inherit;
+}
+
+.input-group-append .input-group-text.password-toggle i {
+    top: 0;
+}
+
+.fa-eye {
+    display: none;
+}
+
+.password-toggle.active .fa-eye {
+    display: inline-block;
+}
