@@ -1,18 +1,32 @@
 <header class="header-menu">
-    <img class="brand-logo" src="/assets/LogoIBS.png" alt="logo" aria-hidden="true" width="50px" height="60px" class="back-to-home">
+    <img class="brand-logo" src="/assets/LogoIBS.png" alt="logo" aria-hidden="true" width="50px" height="60px"
+        class="back-to-home">
     <a [routerLink]="['/home']" class="back-to-home">
         <i class="material-icons">arrow_back</i> Back to Home
     </a>
 </header>
 <main>
+    <div class="popup-container" *ngIf="showPopup">
+        <div class="popup-content">
+            <h2>Create a New Comment</h2>
+            <textarea class="TextBody" id="comment-body" placeholder="Enter comment body" #commentBodyRef></textarea>
+            <button (click)="AddComment(commentBodyRef.value)" class="submit-button">Submit</button>
+            <button (click)="showPopup = false" class="cancel-button">Cancel</button>
+        </div>
+    </div>
+    <a (click)="showPopup = true"><button class="add-post-button">Add Comment</button></a>
     <div class="post-container">
         <div class="post-wrapper">
             <div class="post-header">
-                <img src="{{ post.owner.picture }}" alt="Post Author">
+                <img *ngIf="post.owner && post.owner.picture" [src]="post.owner.picture" alt="Post Author">
                 <div class="post-header-info">
-                    <p>{{ post.owner.displayName }}</p>
+                    <p *ngIf="post.owner && post.owner.displayName">{{ post.owner.displayName }}</p>
                     <p>{{ post.createdAt | date }}</p>
                 </div>
+            </div>
+            <div class="post-buttons">
+                <button (click)="deletePost(post.id)" class="delete-button"><i class="material-icons">delete</i></button>
+                <button class="edit-button"><i class="material-icons">edit</i></button>
             </div>
             <div class="post-body">
                 <p>{{ post.body }}</p>
@@ -23,19 +37,25 @@
             </div>
         </div>
     </div>
-    <div class="post-container">
-        <h1 style="text-align: center;">No Comments To Show</h1>
-        <div class="comment" *ngFor="let comment of post.comments">
-            <!--
-            <img src="{{ comment.author.picture }}" alt="Comment Author">
-            <div class="comment-info">
-                <p>{{ comment.author.displayName }}</p>
-                <p>{{ comment.createdAt | date }}</p>
+    <h1 style="text-align: center;" *ngIf="comments.length === 0">No Comments To Show</h1>
+    <h1 style="text-align: center;" *ngIf="comments.length > 0" >Comments</h1>
+
+    <div class="post-container" *ngFor="let comment of comments">
+        <div class="post-wrapper">
+            <div class="post-header">
+                <img *ngIf="comment.user.picture != undefined" src="{{ comment.user.picture }}" alt="Post Author">
+                <div class="post-header-info">
+                    <p>{{ comment.user.displayName }}</p>
+                    <p>{{ comment.createdAt | date }}</p>
+                </div>
             </div>
-            <div class="comment-body">
+            <div class="post-buttons">
+                <button (click)="deleteComment(comment.id)" class="delete-button"><i class="material-icons">delete</i></button>
+                <button class="edit-button"><i class="material-icons">edit</i></button>
+            </div>
+            <div class="post-body">
                 <p>{{ comment.body }}</p>
             </div>
-            -->
         </div>
     </div>
 </main>

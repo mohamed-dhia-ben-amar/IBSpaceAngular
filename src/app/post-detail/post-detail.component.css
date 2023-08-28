@@ -19,6 +19,8 @@ body {
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 10px;
+    position: relative;
+    /* Add this line */
 }
 
 .post-wrapper {
@@ -28,12 +30,13 @@ body {
     /* Set align-items to flex-start */
     margin-top: 20px;
     border: 10;
-
 }
 
 .post-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    /* Add this line */
     margin-bottom: 10px;
 }
 
@@ -140,4 +143,142 @@ body {
 .back-to-home {
     margin-left: auto;
     margin-right: 20px;
+}
+
+.comment {
+    border: 2px solid gray;
+    margin: 2%;
+    padding: 2%;
+}
+
+.add-post-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.add-post-button:hover {
+    background-color: #0056b3;
+}
+
+.post-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border-radius: 20%;
+}
+
+.edit-button {
+    background-color: blue;
+    color: white;
+    border-radius: 20%;
+}
+
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.header-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1%;
+}
+
+.back-to-home {
+    margin-left: auto;
+}
+
+.popup-container {
+    display: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.popup-content h2 {
+    margin-top: 0;
+}
+
+.popup-content textarea {
+    resize: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    width: 100%;
+    height: 55%;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.cancel-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.cancel-button:hover {
+    background-color: #0056b3;
+}
+
+header {
+    display: block;
+    height: 60px;
+    padding: var(--content-padding);
+    box-shadow: 0px 5px 25px var(--shadow-color);
 }

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { Post } from '../Interfaces/interfaces';
+import { Subject, Observable, catchError, throwError } from 'rxjs';
+import { Comment, Post } from '../Interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class PostService {
 
   private countryIDSubject: Subject<string> = new Subject<string>(); // Define a new Subject to emit CountryID changes
   private apiUrl: string = 'https://api.ib-space.com/api';
-  private apiKey: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiI2NGFkNGM5NDdhMGI5NWY5MTE1NmI5YzIiLCJqdGkiOiI1YmEwY2MxNi1kODkxLTQzZTYtYjcyMi0yZDgxZjgxN2IwNTciLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiI2NGFkNGM5NDdhMGI5NWY5MTE1NmI5YzIiLCJleHAiOjE3NTQ3NDE3Nzd9.2evS1ZCTdJ3FZytOd9sc7AXuSINTVEGaesXJuuJne4g';
+  private apiKey: string = localStorage.getItem("Token")!.toString()
 
   constructor(
     private http: HttpClient
@@ -34,7 +34,11 @@ export class PostService {
     };
 
     // Make the POST request
-    return this.http.post<any>(url, body, { headers });
+    return this.http.post<any>(url, body, { headers }).pipe(
+      catchError((error) => {
+        return throwError('An error occurred while fetching post list.');
+      })
+    );
   }
 
   setCountryID(countryID: string): void {
@@ -53,4 +57,87 @@ export class PostService {
 
     return this.http.post<Post>(`${this.apiUrl}/Post/getPostbyId?idPost=${postId}`, null, { headers });
   }
+
+  GetListComment(postId: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.apiKey}`,
+      'Accept': '*/*',
+    });
+
+    const currentDate = new Date();
+    const formattedDateTime = currentDate.toISOString();
+
+    const body = {
+      idPost: postId,
+      last: formattedDateTime
+    };
+
+    return this.http.post<any>(`${this.apiUrl}/Post/GetListComment`, body, { headers });
+  }
+
+  AddPost(PostBody: string, countryID: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('body', PostBody);
+    formData.append('idCountry', countryID);
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.apiKey}`,
+      'Accept': '*/*',
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/Post`, formData, { headers }).pipe(
+      catchError((error) => {
+        console.error(error);
+        return throwError('An error occurred while adding the post.');
+      })
+    );
+  }
+
+  AddCommentToPost(PostID: string, commentBody: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('body', commentBody);
+    formData.append('idPost', PostID);
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.apiKey}`,
+      'Accept': '*/*',
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/Post/comment`, formData, { headers }).pipe(
+      catchError((error) => {
+        console.error(error);
+        return throwError('An error occurred while adding the comment.');
+      })
+    );
+  }
+
+  DeleteCommentFromPost(CommentID: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.apiKey}`,
+      'Accept': '*/*',
+    });
+
+    return this.http.delete<any>(`${this.apiUrl}/Post/DeleteComment?idComment=${CommentID}`, { headers }).pipe(
+      catchError((error) => {
+        console.error(error);
+        return throwError('An error occurred while deleting the comment.');
+      })
+    );
+  }
+
+  DeletePost(PostID: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.apiKey}`,
+      'Accept': '*/*',
+    });
+
+    return this.http.delete<any>(`${this.apiUrl}/Post?idPost=${PostID}`, { headers }).pipe(
+      catchError((error) => {
+        console.error(error);
+        return throwError('An error occurred while deleting the comment.');
+      })
+    );
+  }
+
 }

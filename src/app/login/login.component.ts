@@ -4,13 +4,14 @@ import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LoginOptionsDialogComponent } from '../login-options-dialog/login-options-dialog.component';
+import { AuthenticationService } from '../Services/authentication.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent{
   public showPassword: boolean = false;
   public email: string = '';
   public password: string = '';
@@ -19,7 +20,8 @@ export class LoginComponent {
     private http: HttpClient,
     private renderer: Renderer2,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private authService: AuthenticationService
   ) {
 
   }
@@ -43,7 +45,7 @@ export class LoginComponent {
     }
     if (signupForm.valid && emailPattern.test(email)) {
       alert('Signin successful!');
-      this.router.navigate(['home']);
+      this.authService.login(email, password)
     } else {
       if (!emailPattern.test(email)) {
         alert('Invalid email format');

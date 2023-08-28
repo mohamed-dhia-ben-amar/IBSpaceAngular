@@ -7,14 +7,26 @@ import { HomeComponent } from './home/home.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { SignupComponent } from './signup/signup.component';
+import {
+  canActivate,
+  redirectLoggedInTo,
+  redirectUnauthorizedTo
+} from '@angular/fire/compat/auth-guard';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'postDetail/:id', component: PostDetailComponent },
-  { path: 'addPost', component: AddPostComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent, },
+  { path: 'home', component: HomeComponent, ...canActivate(redirectUnauthorizedToLogin), },
+  { path: 'postDetail/:id', component: PostDetailComponent, ...canActivate(redirectUnauthorizedToLogin), },
+  { path: 'addPost', component: AddPostComponent, ...canActivate(redirectUnauthorizedToLogin), },
+  { path: 'signup', component: SignupComponent, ...canActivate(redirectLoggedInToHome), },
+  { path: 'verifyEmail/:email', component: VerifyEmailComponent },
+  { path: 'forgotPassword', component: ForgotPasswordComponent },
 ];
 
 

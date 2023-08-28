@@ -20,9 +20,37 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { SignupComponent } from './signup/signup.component';
 import { CommonModule } from '@angular/common';
-import { configFB } from 'src/environments/environment';
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { provideFirebaseApp, getApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AuthenticationService } from './Services/authentication.service';
+import { Auth } from '@angular/fire/auth';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { AuthGuardModule } from '@angular/fire/auth-guard';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBSWtIcrAGRB2UUnj96wTw2UUN9M70f6y4",
+  authDomain: "ib-space.firebaseapp.com",
+  projectId: "ib-space",
+  storageBucket: "ib-space.appspot.com",
+  messagingSenderId: "733640787725",
+  appId: "1:733640787725:web:0b33d1f82103bb52ab9244",
+  measurementId: "G-K80Z330M94"
+};
+
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 @NgModule({
   declarations: [
@@ -34,7 +62,9 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     PostTemplateComponent,
     PostDetailComponent,
     AddPostComponent,
-    SignupComponent
+    SignupComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -48,10 +78,15 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    provideFirebaseApp(() => initializeApp(configFB.firebase)),
-    provideFirestore(() => getFirestore()),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    provideAuth(() => getAuth()),
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AuthGuardModule
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

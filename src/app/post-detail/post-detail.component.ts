@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Post } from '../Interfaces/interfaces';
+import { Comment, Post } from '../Interfaces/interfaces';
 import { PostService } from '../Services/post.service';
 
 @Component({
@@ -12,6 +12,8 @@ import { PostService } from '../Services/post.service';
 export class PostDetailComponent implements OnInit {
 
   @Input() post: Post = {} as Post;
+  comments: Comment[] = [];
+  showPopup = false;
 
   route: ActivatedRoute = inject(ActivatedRoute);
   postID = "";
@@ -19,8 +21,7 @@ export class PostDetailComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private service: PostService,
-    private router: Router,
-    //private router: RouterModule
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -33,12 +34,53 @@ export class PostDetailComponent implements OnInit {
       this.service.getPostById(this.postID).subscribe(
         (post) => {
           this.post = post;
+          this.service.GetListComment(this.postID).subscribe(comments => {
+            this.comments = comments
+          })
         },
         error => {
           console.error("Error:", error);
         }
       );
     }
+  }
+
+  AddComment(commentBody: string) {
+    this.service.AddCommentToPost(this.postID, commentBody).subscribe((response) => {
+      // Request was successful
+      this.router.navigate(['postDetail', this.postID])
+      window.location.reload()
+    },
+      (error) => {
+        // An error occurred
+        console.error('Error adding comment:', error);
+      }
+    );
+  }
+
+  deleteComment(IDComment: string) {
+    this.service.DeleteCommentFromPost(IDComment).subscribe((response) => {
+      // Request was successful
+      this.router.navigate(['postDetail', this.postID])
+      window.location.reload()
+    },
+      (error) => {
+        // An error occurred
+        console.error('Error deleting comment:', error);
+      }
+    );
+  }
+
+  deletePost(IDPost: string) {
+    this.service.DeletePost(IDPost).subscribe((response) => {
+      // Request was successful
+      this.router.navigate(['home'])
+    },
+      (error) => {
+        // An error occurred
+        console.error('Error deleting post:', error);
+      }
+    );
   }
 
 }

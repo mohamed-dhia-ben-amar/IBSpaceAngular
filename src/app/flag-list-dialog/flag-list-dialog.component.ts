@@ -63,12 +63,8 @@ export class FlagListDialogComponent implements OnInit {
     });
     confirmationDialog.afterClosed().subscribe(result => {
       if (result === 'ok') {
-        localStorage.clear();
-        console.log(country.id);
         localStorage.setItem('CountryID', country.id);
-        const CountryID = this.getFromLocalStorage("CountryID")
-        console.log('CountryID: ', CountryID);
-        window.location.reload(); // Reload the page after the country is selected
+        window.location.reload();
       }
     });
     this.dialogRef.close(country.id);

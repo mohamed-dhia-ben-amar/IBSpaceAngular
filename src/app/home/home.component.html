@@ -1,6 +1,12 @@
 <header class="header-menu">
     <img class="brand-logo" src="/assets/LogoIBS.png" alt="logo" aria-hidden="true" width=50px height=60px>
+    <h3>
+        IBSpace Website
+        <small class="text-muted">Welcomes you! </small>
+        <small *ngIf="user$ | async as user">{{user.displayName || user.email }}</small>
+    </h3>
     <ul class="menu">
+        <li><a (click)="SignOut()"><span class="material-icons">exit_to_app</span></a></li>
         <li><a><span class="material-icons">person</span></a></li>
         <li><a><span class="material-icons">mail</span></a></li>
         <li><a><span class="material-icons">calendar_month</span></a></li>

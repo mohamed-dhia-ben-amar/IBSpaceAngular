@@ -15,19 +15,35 @@
         <div class="container">
             <img src="/assets/LogoIBS.png" alt="Company Logo" class="logo">
 
-            <form #formulaire="ngForm" (ngSubmit)="Signup(formulaire)">
+            <form [formGroup]="signUpForm" (ngSubmit)="submit()">
                 <div class="form-group">
-                    <input name="email" [(ngModel)]="email" type="email" class="form-control" placeholder="Email"
+                    <input name="username" formControlName="username" type="text" class="form-control"
+                        placeholder="Username" autocomplete="nope" required>
+                    <mat-error *ngIf="username?.errors?.['required']">
+                        Name is required
+                    </mat-error>
+                    <span class="fa fa-envelope material-icons">email</span>
+                </div>
+
+                <div class="form-group">
+                    <input name="email" formControlName="email" type="email" class="form-control" placeholder="Email"
                         autocomplete="nope" required>
-                    <div *ngIf="formulaire.controls['email'] && !formulaire.controls['email']!.valid && formulaire.controls['email']!.dirty"
-                        class="text-danger">Email is required.</div>
+                    <mat-error *ngIf="email?.errors?.['required']">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="email?.errors?.['email']">
+                        Please enter a valid email address
+                    </mat-error>
                     <span class="fa fa-envelope material-icons">email</span>
                 </div>
 
                 <div class="form-group">
                     <div class="input-group">
-                        <input id="password" name="password" [(ngModel)]="password" type="password"
+                        <input id="password" name="password" formControlName="password" type="password"
                             autocomplete="new-password" class="form-control" placeholder="Password" required>
+                        <mat-error *ngIf="password?.errors?.['required']">
+                            Password is required
+                        </mat-error>
                         <div class="input-group-append">
                             <span class="input-group-text">
                                 <i class="fa fa-lock material-icons">lock</i>
@@ -40,8 +56,32 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <div class="input-group">
+                        <input id="confirmPassword" name="confirmPassword" formControlName="confirmPassword"
+                            type="password" autocomplete="new-password" class="form-control"
+                            placeholder="Confirm Password" required>
+                        <mat-error *ngIf="confirmPassword?.errors?.['required']">
+                            Confirm Password is required
+                        </mat-error>
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-lock material-icons">lock</i>
+                            </span>
+                            <span class="input-group-text password-toggle" (click)="togglePasswordVisibility()">
+                                <i class="fa fa-eye material-icons" *ngIf="!showPassword">visibility</i>
+                                <i class="fa fa-eye-slash material-icons" *ngIf="showPassword">visibility_off</i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <mat-error *ngIf="signUpForm.errors?.['passwordsDontMatch']">
+                    Passwords should match
+                </mat-error>
+
                 <!-- Signup button -->
                 <button type="submit" class="btn btn-primary">Signup</button>
+                <p class="create-account">Already have an account? <a [routerLink]="['/login']">Login</a>.
             </form>
         </div>
     </section>

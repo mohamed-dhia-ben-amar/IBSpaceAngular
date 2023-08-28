@@ -44,26 +44,10 @@ export class PostTemplateComponent implements OnInit, OnDestroy {
 
   getPosts(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      const CountryID = this.getFromLocalStorage("CountryID")
+      const CountryID = localStorage.getItem("CountryID")!
 
       this.service.getPostListByCountry(CountryID).subscribe(
         (data: any) => {
-          /*
-          for (let index = 0; index < data.posts.length; index++) {
-            const element = data.posts[index];
-            if (element.body.includes('http://') || element.body.includes('https://')) {
-              this.LPservice.GetLinkPreview(element.body)
-                .then(response => response.json())
-                .then(data => {
-                  const url = data.url;
-                  console.log(url);
-                })
-                .catch(error => {
-                  console.error('Error fetching data:', error);
-                });
-            }
-          }
-          */
           this.posts = data.posts;
           resolve();
         },
@@ -76,15 +60,13 @@ export class PostTemplateComponent implements OnInit, OnDestroy {
   }
 
   getCountryID(): void {
-    this.countryID = this.getFromLocalStorage("CountryID");
+    this.countryID = localStorage.getItem("CountryID")!;
     // Subscribe to changes in the CountryID
     this.service.countryIDChanged.pipe(takeUntil(this.destroy$))
       .subscribe(
         (newCountryID: string) => {
           this.countryID = newCountryID;
-          console.log(this.posts);
           this.getPosts(); // When the CountryID changes, repopulate the posts array
-          console.log(this.posts);
         }
       );
   }
@@ -101,7 +83,6 @@ export class PostTemplateComponent implements OnInit, OnDestroy {
     return new Promise<void>((resolve, reject) => {
       this.service.getPostById(id).subscribe(
         (post: Post) => {
-          console.log(post);
           this.router.navigate(['post-detail', id]);
           resolve();
         },

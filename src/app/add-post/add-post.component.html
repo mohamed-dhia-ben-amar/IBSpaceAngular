@@ -9,7 +9,7 @@
         <div class="popup-container">
             <div class="popup-content">
                 <h2>Create a New Post</h2>
-                <textarea class="TextBody" id="post-body" placeholder="Enter post body"></textarea>
+                <textarea class="TextBody" id="post-body" placeholder="Enter post body" #postBodyRef></textarea>
                 <div class="attachment-icons">
                     <label for="file-input">
                         <span class="material-icons">attach_file</span>
@@ -26,7 +26,7 @@
                     </label>
                     <input type="file" id="image-input" style="display: none">
                 </div>
-                <button class="submit-button">Submit</button>
+                <button (click)="AddPost(postBodyRef.value)" class="submit-button">Submit</button>
                 <button [routerLink]="['/home']" class="cancel-button">Cancel</button>
             </div>
         </div>

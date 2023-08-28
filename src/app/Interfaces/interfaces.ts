@@ -57,3 +57,19 @@ export interface Post {
     image: string,
     url: string
 }
+
+export interface Comment {
+    id: string,
+    idUser: string,
+    idPost: string,
+    user: {
+        id: string,
+        displayName: string,
+        picture: string
+    },
+    body: string,
+    isModified: boolean,
+    oldComment: [string],
+    createdAt: string,
+    mediaCategory: string
+}
