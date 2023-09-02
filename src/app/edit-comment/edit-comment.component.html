@@ -1,0 +1,18 @@
+<header class="header-menu">
+    <img class="brand-logo" src="/assets/LogoIBS.png" alt="logo" aria-hidden="true" width="50px" height="60px">
+    <a [routerLink]="['/home']" class="back-to-home">
+        <i class="material-icons">arrow_back</i> Back to Home
+    </a>
+</header>
+<main>
+    <section class="content">
+        <div class="popup-container">
+            <div class="popup-content">
+                <h2>Edit Comment</h2>
+                <textarea class="TextBody" id="comment-body" placeholder="Enter comment body" #commentBodyRef>{{commentBody}}</textarea>
+                <button (click)="EditComment(commentBodyRef.value)" class="submit-button">Edit</button>
+                <button (click)="BackToPost()" class="cancel-button">Cancel</button>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, Observable, catchError, throwError } from 'rxjs';
+import { Subject, Observable, catchError, throwError, map } from 'rxjs';
 import { Comment, Post } from '../Interfaces/interfaces';
 
 @Injectable({
@@ -11,6 +11,8 @@ export class PostService {
   private countryIDSubject: Subject<string> = new Subject<string>(); // Define a new Subject to emit CountryID changes
   private apiUrl: string = 'https://api.ib-space.com/api';
   private apiKey: string = localStorage.getItem("Token")!.toString()
+  
+  comments: Comment[] = [];
 
   constructor(
     private http: HttpClient
@@ -133,6 +135,57 @@ export class PostService {
     });
 
     return this.http.delete<any>(`${this.apiUrl}/Post?idPost=${PostID}`, { headers }).pipe(
+      catchError((error) => {
+        console.error(error);
+        return throwError('An error occurred while deleting the comment.');
+      })
+    );
+  }
+
+  EditPost(PostID: string, PostBody: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.apiKey}`,
+      'Accept': '*/*',
+    });
+
+    const body = {
+      idPost: PostID,
+      body: PostBody
+    };
+
+    return this.http.put<any>(`${this.apiUrl}/Post`,body, { headers }).pipe(
+      catchError((error) => {
+        console.error(error);
+        return throwError('An error occurred while deleting the comment.');
+      })
+    );
+  }
+
+  getCommentById(commentId: string, postId: string): any {
+    this.GetListComment(postId).subscribe(comments => {
+      for (let index = 0; index < comments.length; index++) {
+        const element = comments[index];
+        if (element.id === commentId) {
+          return element
+        }
+      }
+    })
+  }
+
+  EditComment(CommentID: string, CommentBody: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.apiKey}`,
+      'Accept': '*/*',
+    });
+
+    const body = {
+      idComment: CommentID,
+      body: CommentBody
+    };
+
+    return this.http.put<any>(`${this.apiUrl}/Post/UpdateComment`,body, { headers }).pipe(
       catchError((error) => {
         console.error(error);
         return throwError('An error occurred while deleting the comment.');

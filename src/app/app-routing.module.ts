@@ -14,6 +14,8 @@ import {
 } from '@angular/fire/compat/auth-guard';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
+import { EditCommentComponent } from './edit-comment/edit-comment.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
@@ -27,6 +29,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent, ...canActivate(redirectLoggedInToHome), },
   { path: 'verifyEmail/:email', component: VerifyEmailComponent },
   { path: 'forgotPassword', component: ForgotPasswordComponent },
+  { path: 'editPost/:id', component: EditPostComponent },
+  { path: 'editComment/:idComment/:idPost/:CommentBody', component: EditCommentComponent },
 ];
 
 

@@ -36,6 +36,8 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthGuardModule } from '@angular/fire/auth-guard';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
+import { EditCommentComponent } from './edit-comment/edit-comment.component';
 
 
 const firebaseConfig = {
@@ -64,7 +66,9 @@ const analytics = getAnalytics(app);
     AddPostComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    EditPostComponent,
+    EditCommentComponent
   ],
   imports: [
     BrowserModule,
